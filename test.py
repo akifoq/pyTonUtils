@@ -1,0 +1,17 @@
+from cells import *
+
+b = Builder()
+b.store_int(-2, 5)
+b.store_uint(123, 8)
+b.store_grams(1000)
+b2 = Builder()
+b2.store_slice(Slice("b{0001}"))
+b2.store_slice(Slice("x{ef}"))
+b.store_ref(b2.end_cell())
+c = b.end_cell()
+print(c.hash())
+s = c.begin_parse()
+print(s.load_int(5))
+print(s.load_uint(8))
+print(s.load_grams())
+print(s.load_ref().begin_parse().load_grams())
